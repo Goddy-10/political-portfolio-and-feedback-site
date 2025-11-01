@@ -18,7 +18,7 @@ export default function Home() {
       <section
         className="
     w-full h-[50vh] flex flex-col items-center justify-center
-    bg-cover bg-center relative
+    bg-cover bg-center relative mt-20
   "
         // Hero image placeholder (replace with actual image path later)
         style={{
