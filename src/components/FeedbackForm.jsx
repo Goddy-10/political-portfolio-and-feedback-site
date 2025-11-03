@@ -12,9 +12,9 @@ export default function FeedbackForm() {
   const [formData, setFormData] = useState({
     subcounty: "",
     ward: "",
-    area: "",
-    ageBracket: "",
-    vote: "",
+    village: "",
+    age_bracket: "",
+    vote_input: "",
     reason: "",
   });
 
@@ -24,16 +24,29 @@ export default function FeedbackForm() {
     setFormData({ ...formData, [name]: value });
   };
 
-  // Submit form to backend (Flask endpoint)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Map frontend form fields to backend expectations
+    const payload = {
+      subcounty: formData.subcounty,
+      ward: formData.ward,
+      village: formData.area, // ✅ area → village
+      age_bracket: formData.ageBracket, // ✅ ageBracket → age_bracket
+      will_vote: formData.vote, // ✅ vote → will_vote
+      reason: formData.reason,
+    };
+
     try {
-      const response = await fetch("http://localhost:5000/api/feedback", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "http://localhost:5000/api/feedback/submit",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (response.ok) {
         alert("Thank you for your feedback! ❤️");
@@ -46,13 +59,16 @@ export default function FeedbackForm() {
           reason: "",
         });
       } else {
-        alert("Something went wrong, please try again.");
+        const err = await response.json();
+        console.error("Server responded with:", err);
+        alert(err.error || "Something went wrong, please try again.");
       }
     } catch (error) {
       console.error("Error submitting feedback:", error);
       alert("Unable to reach server. Try again later.");
     }
   };
+ 
 
   return (
     <div className="min-h-screen bg-purple-50 flex flex-col items-center pt-24 pb-16 px-4">

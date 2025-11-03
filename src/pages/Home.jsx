@@ -11,18 +11,18 @@ import Header from "../components/Header";
 
 export default function Home() {
   return (
-      <div className="bg-purple-50 min-h-screen flex flex-col items-center justify-start text-gray-800">
-          <Header/>
+    <div className="bg-purple-50 min-h-screen flex flex-col items-center justify-start text-gray-800">
+      <Header />
       {/* 🟣 Hero Section */}
       {/* 🟣 Hero Section (reduced height for better balance) */}
       <section
         className="
     w-full h-[50vh] flex flex-col items-center justify-center
-    bg-cover bg-center relative mt-20
+     bg-left relative mt-20
   "
         // Hero image placeholder (replace with actual image path later)
         style={{
-          backgroundImage: `url("")`,
+          backgroundImage: `url("https://pbs.twimg.com/media/FTvMAdpVEAA_6gZ?format=jpg&name=small")`,
         }}
       >
         {/* Overlay for better text visibility */}
