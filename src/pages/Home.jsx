@@ -4,50 +4,88 @@
 // Includes Hero, Vision, Objectives, Projects, and Footer
 // The slideshow will be imported separately as Slideshow.jsx
 // ===========================================
-
+import { useState,useEffect } from "react";
 import Slideshow from "../components/Slideshow";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { motion } from "framer-motion"
+import { API_URL } from "../config";
+
+
+
 
 export default function Home() {
+  const [heroImage, setHeroImage] = useState(null);
+
+  useEffect(() => {
+    async function fetchHeroImage() {
+      try {
+        const res = await fetch(`${API_URL}/hero`);
+        const data = await res.json();
+        setHeroImage(data.image_url);
+      } catch (err) {
+        console.error("Failed to fetch hero image:", err);
+      }
+    }
+    fetchHeroImage();
+  }, []);
   return (
     <div className="bg-purple-50 min-h-screen flex flex-col items-center justify-start text-gray-800">
       <Header />
       {/* 🟣 Hero Section */}
       {/* 🟣 Hero Section (reduced height for better balance) */}
-      <section
-        className="
-    w-full h-[50vh] flex flex-col items-center justify-center
-     bg-left relative mt-20
-  "
-        // Hero image placeholder (replace with actual image path later)
-        style={{
-          backgroundImage: `url("https://pbs.twimg.com/media/FTvMAdpVEAA_6gZ?format=jpg&name=small")`,
-        }}
-      >
-        {/* Overlay for better text visibility */}
-        <div className="absolute inset-0 bg-purple-900 bg-opacity-40"></div>
+      <section className="w-full min-h-[80vh] mt-20 flex flex-col md:flex-row items-stretch justify-center bg-gray-50 overflow-hidden">
+        {/* Left: Candidate Image */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
+          className="w-full md:w-1/2 h-[70vh] md:h-auto overflow-hidden flex items-center justify-center bg-gray-100"
+        >
+          {heroImage ? (
+            <img
+              src={heroImage}
+              alt="Candidate"
+              className="w-full h-full object-contain md:object-center transition-all duration-700"
+            />
+          ) : (
+            <p className="text-gray-400 italic">Loading candidate image...</p>
+          )}
+        </motion.div>
 
-        {/* Text Overlay */}
-        <div className="relative text-center text-white px-6 md:px-10">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-3 drop-shadow-lg">
-            Thuranira Kathiai
-          </h1>
-          <p className="text-lg md:text-xl italic mb-5 drop-shadow-md">
-            Empowering Communities, Building for the Future Generation
-          </p>
+        {/* Right: Text Section */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
+          className="relative w-full md:w-1/2 h-[80vh] flex flex-col items-center justify-center text-center text-white px-6 py-10"
+        >
+          {/* Background Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-800 via-purple-700 to-purple-900 animate-gradient-slow"></div>
 
-          {/* Feedback Button */}
-          <a
-            href="/feedback"
-            className="
-        bg-purple-700 hover:bg-purple-800 transition-all
-        text-white font-semibold px-6 py-2 rounded-full shadow-md
-      "
-          >
-            Share Your Feedback ❤️
-          </a>
-        </div>
+          {/* Text Content */}
+          <div className="relative z-10 w-full max-w-lg px-4">
+            <p className="text-xs sm:text-sm md:text-base uppercase tracking-widest bg-white/20 px-4 py-1 rounded-full inline-block mb-3">
+              🗳️ Official Campaign Portal
+            </p>
+
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-3 drop-shadow-lg leading-tight">
+              Thuranira Kathiai
+            </h1>
+
+            <p className="text-base sm:text-lg md:text-xl italic mb-6 drop-shadow-md">
+              Empowering Communities, Building for the Future Generation
+            </p>
+
+            <a
+              href="/feedback"
+              className="relative overflow-hidden bg-white text-purple-800 font-semibold px-6 sm:px-8 py-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,255,255,0.6)] hover:scale-105 inline-block"
+            >
+              <span className="relative z-10">Share Your Feedback ❤️</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-pink-400 via-purple-500 to-indigo-400 opacity-0 hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+            </a>
+          </div>
+        </motion.div>
       </section>
 
       {/* 🟣 Slideshow Section (increased height, cleaner background) */}

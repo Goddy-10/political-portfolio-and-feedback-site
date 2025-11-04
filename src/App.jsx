@@ -11,6 +11,14 @@ import AdminDashboard from "./pages/AdminDashboard";
 
 
 export default function App() {
+
+  const ProtectedRoute = ({ children }) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return <Navigate to="/" replace />;
+    }
+    return children;
+  };
   return (
     <Router>
       <Routes>
@@ -18,7 +26,14 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/feedback" element={<FeedbackForm />} />
         <Route path="/login" element={<AdminLogin />} />
-        <Route path="/dashboard" element={<AdminDashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

@@ -27,8 +27,14 @@ const AdminLogin = () => {
 
       if (response.ok) {
         // 💾 Save token + role in localStorage
-        localStorage.setItem("token", data.token);
+         
+        localStorage.setItem("token", data.access_token);
+        localStorage.setItem("username", data.username);
         localStorage.setItem("role", data.role);
+
+        console.log("Token stored:", localStorage.getItem("token")); // should log correctly
+        console.log("Username stored:", localStorage.getItem("username"));
+
 
         // 🧭 Redirect based on role
         navigate("/dashboard");
