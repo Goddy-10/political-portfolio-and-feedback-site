@@ -15,7 +15,9 @@ import { API_URL } from "../config";
 
 
 export default function Home() {
-  const [heroImage, setHeroImage] = useState(null);
+  const [heroImage, setHeroImage] = useState(
+    "https://scontent.fnbo13-1.fna.fbcdn.net/v/t39.30808-6/571412046_1543259503521507_4999487872320144460_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFpimC3LIQaNUshAxbT2bFcU3ICcVNIj9VTcgJxU0iP1ZZ1rrl-K43iklL8pH3hcJsLbYjDaSV2xiiq9GonWXal&_nc_ohc=Fih2IJ76GM0Q7kNvwFvhaSL&_nc_oc=AdmeLL1LyU5ZuEaJeB-59M1hDFnliJrOycrTJqADmhVcusVfb17XMQ9tiKt7g-e_WP4&_nc_zt=23&_nc_ht=scontent.fnbo13-1.fna&_nc_gid=YXiQ8pTBRIxmOdf-Dd85qg&oh=00_AfgfwGqGPOLix_lgvwm0f7VsifJh10KvRrxAXFuWXmIfow&oe=69113B1D"
+  );
 
   useEffect(() => {
     async function fetchHeroImage() {
