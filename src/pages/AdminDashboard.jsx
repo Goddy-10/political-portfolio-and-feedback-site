@@ -32,7 +32,7 @@ import { API_URL } from "../config";
    ========================= */
 // const API_URL = "http://127.0.0.1:5000/api"; // backend base (keep /api here)
 const CLOUDINARY_CLOUD_NAME = "dqbnwmsta"; // <-- set your cloud name
-const CLOUDINARY_UPLOAD_PRESET = "yoqc1jjuawt"; // <-- set your unsigned preset
+const CLOUDINARY_UPLOAD_PRESET = "qc1jjuaw"; // <-- set your unsigned preset
 const AUTH_TOKEN_KEY = "token"; // localStorage JWT key (if you use auth) - adjust if needed
 
 /* =========================
