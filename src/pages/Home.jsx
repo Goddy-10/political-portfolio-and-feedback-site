@@ -91,15 +91,15 @@ export default function Home() {
       </section>
 
       {/* 🟣 Slideshow Section (increased height, cleaner background) */}
-      <section className="w-full py-16 bg-purple-50">
+      <section className="w-full pt-16 pb-24 bg-purple-50">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-purple-800 mb-8">
             Our Journey in Pictures
           </h2>
 
           {/* Slideshow component (autoplay, captions, arrows) */}
-          <div className="h-[500px] md:h-[600px]">
-            <Slideshow />
+          <div className="w-full min-h-[300px] max-h-[600px] flex justify-center items-center bg-gray-100">
+            <Slideshow className/>
           </div>
         </div>
       </section>

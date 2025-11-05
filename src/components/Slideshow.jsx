@@ -88,7 +88,7 @@ export default function Slideshow() {
       <img
         src={image_url}
         alt={caption}
-        className="w-full h-full object-cover transition-all duration-700 ease-in-out"
+        className="w-full h-auto object-contain transition-all duration-700 ease-in-out"
       />
 
       {/* Gradient Overlay for readability */}

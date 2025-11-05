@@ -777,12 +777,12 @@ export default function AdminDashboard() {
                               {s.active ? "Deactivate" : "Activate"}
                             </button>
 
-                            <button
+                            {/* <button
                               onClick={() => handleSetHero(s.image_url)}
                               className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded-full text-sm flex-1 transition-all"
                             >
                               Set as Hero
-                            </button>
+                            </button> */}
                             <button
                               onClick={() => handleDelete(s.id)}
                               className="flex-1 px-3 py-1 rounded-full bg-red-500 text-white text-sm"
