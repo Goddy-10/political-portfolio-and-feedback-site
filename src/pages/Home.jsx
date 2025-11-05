@@ -73,7 +73,9 @@ export default function Home() {
             </p>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-3 drop-shadow-lg leading-tight">
-              Thuranira Kathiai
+              Hon.Benson Thuranira Kathiai 
+              <br/>
+              MCA Muthara Ward 2027
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl italic mb-6 drop-shadow-md">

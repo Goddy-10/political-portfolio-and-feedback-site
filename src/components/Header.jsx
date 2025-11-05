@@ -45,7 +45,7 @@ export default function Header() {
         <div className="flex items-center space-x-2">
           {/* Candidate name */}
           <Link to="/" className="text-purple-800 font-bold text-lg md:text-xl">
-            Thuranira Kathiai
+            Hon.Benson Thuranira Kathiai
           </Link>
           {/* Slogan (visible only on larger screens) */}
           <span className="hidden md:inline text-sm italic text-purple-700">
