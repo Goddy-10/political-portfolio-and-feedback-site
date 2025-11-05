@@ -6,6 +6,7 @@
 // =====================================================
 
 import { useState } from "react";
+import { API_URL } from "../config";
 
 export default function FeedbackForm() {
   // Local form states
@@ -39,14 +40,11 @@ export default function FeedbackForm() {
     };
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/feedback/submit",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/feedback/submit`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
       if (response.ok) {
         alert("Thank you for your feedback! ❤️");

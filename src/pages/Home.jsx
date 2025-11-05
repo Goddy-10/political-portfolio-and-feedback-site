@@ -20,7 +20,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchHeroImage() {
       try {
-        const res = await fetch(`${API_URL}/hero`);
+        const res = await fetch(`${API_URL}/hero/hero`);
         const data = await res.json();
         setHeroImage(data.image_url);
       } catch (err) {

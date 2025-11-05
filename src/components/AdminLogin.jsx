@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 const AdminLogin = () => {
   // 🧠 Local state for form fields and errors
@@ -15,7 +16,7 @@ const AdminLogin = () => {
     setError("");
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/auth/login", {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

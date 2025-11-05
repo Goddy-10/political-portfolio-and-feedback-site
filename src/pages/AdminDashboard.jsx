@@ -25,11 +25,12 @@ import {
 import { FiUploadCloud, FiTrash2, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 /* =========================
    CONFIG - change these
    ========================= */
-const API_URL = "http://127.0.0.1:5000/api"; // backend base (keep /api here)
+// const API_URL = "http://127.0.0.1:5000/api"; // backend base (keep /api here)
 const CLOUDINARY_CLOUD_NAME = "dqbnwmsta"; // <-- set your cloud name
 const CLOUDINARY_UPLOAD_PRESET = "yoqc1jjuawt"; // <-- set your unsigned preset
 const AUTH_TOKEN_KEY = "token"; // localStorage JWT key (if you use auth) - adjust if needed
@@ -123,7 +124,7 @@ export default function AdminDashboard() {
   const fileRef = useRef();
 
   // Pie chart colors
-  const PIE_COLORS = ["#7e58f0ff", "#e97a7aff"]; // Yes (purple), No (soft red)
+  const PIE_COLORS = ["#65f058ff", "#e66161ff"]; // Yes (purple), No (soft red)
 
   // Helpers for auth header (if JWT is used)
   const AUTH_TOKEN_KEY = "token";
@@ -139,7 +140,7 @@ export default function AdminDashboard() {
   // Summary for pie & cards
   async function fetchSummary() {
     try {
-      const res = await fetch(`${API_URL}/dashboard/summary`);
+      const res = await fetch(`${API_URL}/api/dashboard/summary`);
       if (!res.ok) throw new Error("Failed to fetch summary");
       const data = await res.json();
       // normalize keys (your backend uses total_feedback/total_yes/total_no)
@@ -153,7 +154,7 @@ export default function AdminDashboard() {
   // Regional breakdown by subcounty
   async function fetchBySubcounty() {
     try {
-      const res = await fetch(`${API_URL}/dashboard/by-subcounty`);
+      const res = await fetch(`${API_URL}/api/dashboard/by-subcounty`);
       if (!res.ok) throw new Error("Failed to fetch regional data");
       const data = await res.json();
       setBySubcounty(data);
@@ -166,7 +167,7 @@ export default function AdminDashboard() {
   // Reasons for No votes (new route)
   async function fetchReasons() {
     try {
-      const res = await fetch(`${API_URL}/feedback/reasons`);
+      const res = await fetch(`${API_URL}/api/feedback/reasons`);
       if (!res.ok) throw new Error("Failed to fetch reasons");
       const data = await res.json(); // expecting [{reason: "..."}]
       setReasons(data);
@@ -179,7 +180,7 @@ export default function AdminDashboard() {
   // Slides
   async function fetchSlides() {
     try {
-      const res = await fetch(`${API_URL}/slides/`);
+      const res = await fetch(`${API_URL}/api/slides/`);
       if (!res.ok) throw new Error("Failed to fetch slides");
       const data = await res.json();
       // normalize slide fields (active vs is_active)
@@ -207,7 +208,7 @@ export default function AdminDashboard() {
         return;
       }
 
-      const res = await fetch(`${API_URL}/admin/all`, {
+      const res = await fetch(`${API_URL}/api/admin/all`, {
         headers: authHeaders(),
       });
       if (!res.ok) {
@@ -237,7 +238,7 @@ export default function AdminDashboard() {
 
   const fetchNoReasons = async () => {
     try {
-      const res = await fetch(`${API_URL}/dashboard/no-reasons`);
+      const res = await fetch(`${API_URL}/api/dashboard/no-reasons`);
       const data = await res.json();
       setNoReasons(data);
     } catch (err) {
@@ -313,7 +314,7 @@ export default function AdminDashboard() {
         uploaded_by: localStorage.getItem("username") || "admin", // adjust as needed
       };
 
-      const res = await fetch(`${API_URL}/slides/upload`, {
+      const res = await fetch(`${API_URL}/api/slides/upload`, {
         method: "POST",
         headers: { "Content-Type": "application/json", ...authHeaders() },
         body: JSON.stringify(payload),
@@ -344,7 +345,7 @@ export default function AdminDashboard() {
   async function handleDelete(id) {
     if (!window.confirm("Delete this slide?")) return;
     try {
-      const res = await fetch(`${API_URL}/slides/${id}`, {
+      const res = await fetch(`${API_URL}/api/slides/${id}`, {
         method: "DELETE",
         headers: authHeaders(),
       });
@@ -360,7 +361,7 @@ export default function AdminDashboard() {
 
   async function handleToggleActive(id) {
     try {
-      const res = await fetch(`${API_URL}/slides/${id}/toggle`, {
+      const res = await fetch(`${API_URL}/api/slides/${id}/toggle`, {
         method: "PATCH",
         headers: authHeaders(),
       });
@@ -376,7 +377,7 @@ export default function AdminDashboard() {
 
   async function handleSetHero(imageUrl) {
     try {
-      const res = await fetch(`${API_URL}/hero`, {
+      const res = await fetch(`${API_URL}/api/hero`, {
         method: "POST",
         headers: {
           ...authHeaders(),
@@ -405,7 +406,7 @@ export default function AdminDashboard() {
     if (!newAdmin.username || !newAdmin.password)
       return addToast("Username and password required", "error");
     try {
-      const res = await fetch(`${API_URL}/admin/add`, {
+      const res = await fetch(`${API_URL}/api/admin/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json", ...authHeaders() },
         body: JSON.stringify(newAdmin),
@@ -424,7 +425,7 @@ export default function AdminDashboard() {
   async function removeAdmin(id) {
     if (!window.confirm("Remove this admin?")) return;
     try {
-      const res = await fetch(`${API_URL}/admin/${id}`, {
+      const res = await fetch(`${API_URL}/api/admin/${id}`, {
         method: "DELETE",
         headers: authHeaders(),
       });
@@ -444,7 +445,7 @@ export default function AdminDashboard() {
     if (!changePw.old_password || !changePw.new_password)
       return addToast("Both passwords required", "error");
     try {
-      const res = await fetch(`${API_URL}/admin/change-password`, {
+      const res = await fetch(`${API_URL}/api/admin/change-password`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json", ...authHeaders() },
         body: JSON.stringify(changePw),
