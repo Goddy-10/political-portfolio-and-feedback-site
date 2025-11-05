@@ -31,9 +31,12 @@ import { API_URL } from "../config";
    CONFIG - change these
    ========================= */
 // const API_URL = "http://127.0.0.1:5000/api"; // backend base (keep /api here)
+
 const CLOUDINARY_CLOUD_NAME = "dqbnwmsta"; // <-- set your cloud name
 const CLOUDINARY_UPLOAD_PRESET = "slides-upload"; // <-- set your unsigned preset
 const AUTH_TOKEN_KEY = "token"; // localStorage JWT key (if you use auth) - adjust if needed
+console.log("Preset:", CLOUDINARY_UPLOAD_PRESET);
+console.log("Cloud Name:", CLOUDINARY_CLOUD_NAME);
 
 /* =========================
    Small Toast system (no external lib)
