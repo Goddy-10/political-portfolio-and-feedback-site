@@ -10,6 +10,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { motion } from "framer-motion"
 import { API_URL } from "../config";
+import { Link } from "react-router-dom";
 
 
 
@@ -79,13 +80,13 @@ export default function Home() {
               Empowering Communities, Building for the Future Generation
             </p>
 
-            <a
-              href="/feedback"
+            <Link
+              to="/feedback"
               className="relative overflow-hidden bg-white text-purple-800 font-semibold px-6 sm:px-8 py-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,255,255,0.6)] hover:scale-105 inline-block"
             >
               <span className="relative z-10">Share Your Feedback ❤️</span>
               <span className="absolute inset-0 bg-gradient-to-r from-pink-400 via-purple-500 to-indigo-400 opacity-0 hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
-            </a>
+            </Link>
           </div>
         </motion.div>
       </section>
@@ -99,7 +100,7 @@ export default function Home() {
 
           {/* Slideshow component (autoplay, captions, arrows) */}
           <div className="w-full min-h-[300px] max-h-[600px] flex justify-center items-center bg-gray-100">
-            <Slideshow className/>
+            <Slideshow className />
           </div>
         </div>
       </section>
