@@ -275,7 +275,7 @@ export default function AdminDashboard() {
         "Cloudinary configuration missing - set CLOUDINARY_CLOUD_NAME and CLOUDINARY_UPLOAD_PRESET"
       );
     }
-    const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/api/upload`;
+    const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`;
     const form = new FormData();
     form.append("file", fileToUpload);
     form.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
